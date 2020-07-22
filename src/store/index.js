@@ -2,6 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // import example from './module-example'
+import settings from './settings'
+
+// plugins
+import VuexPersistence from 'vuex-persist'
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+})
 
 Vue.use(Vuex)
 
@@ -17,13 +25,19 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      // example
+      settings
     },
+
+    plugins: [vuexLocal.plugin],
 
     // enable strict mode (adds overhead!)
     // for dev mode only
     strict: process.env.DEV
   })
+
+  if (process.env.DEV) {
+    window.$dev_store = Store
+  }
 
   return Store
 }

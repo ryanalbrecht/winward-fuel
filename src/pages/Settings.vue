@@ -6,9 +6,17 @@
 
         <q-form
           @submit="onSubmit"
-          @reset="onReset"
           class="q-gutter-md"
         >
+
+          <q-input
+            square outlined stack-label dense
+            label="Car Numbers"
+            lazy-rules
+            v-model="settings.carNumbers"
+            :rules="[ val => val && val.length > 0 || 'Please type something']"
+          />
+
           <q-input
             square outlined stack-label dense
             label="P1TS hostname"
@@ -34,7 +42,6 @@
             :rules="[ val => val && val.length > 0 || 'Please type something']"
           />
 
-
           <q-input
             square outlined stack-label dense
             type="number"
@@ -43,13 +50,13 @@
             v-model="settings.updateInterval"
             :rules="[
               val => val !== null && val !== '' || 'Please type your age',
-              val => val > 0 && val < 100 || 'Please type a real age'
+              val => val > 1 && val < 10000 || 'please type a number between 1 and 10000'
             ]"
           />
 
 
           <div>
-            <q-btn label="Submit" type="submit" color="primary" v-on:click="submit" />
+            <q-btn label="Submit" type="submit" color="primary" />
           </div>
         </q-form>
 
@@ -63,21 +70,18 @@
 </template>
 
 <script>
+const cloneDeep = require('clone-deep')
+
 export default {
   // name: 'PageName',
   data: function () {
     return {
-      settings: {
-        host: 'pit1.winwardpit.com',
-        username: 'winward',
-        password: '123456',
-        updateInterval: 10
-      }
+      settings: cloneDeep(this.$store.state.settings)
     }
   },
   methods: {
-    submit () {
-      console.log('submitted')
+    onSubmit () {
+      this.$store.dispatch('settings/setSettings', this.settings)
     }
   }
 }
