@@ -1,5 +1,5 @@
 <template>
-  <div class="flag-status-wrap" style="width:115px">
+  <div class="flag-status-wrap" style="width:130px">
 
     <div class="column">
       <div class="col flag" :style='{backgroundColor: flagColor}'>{{flagName}}</div>
@@ -12,22 +12,21 @@
 export default {
   name: 'FlagStatus',
   props: {
-    flag: String
   },
   computed: {
     flagName: function () {
-      return (this.flag || 'finished').toUpperCase()
+      return (this.$store.state.race.flag || 'finished').toUpperCase()
     },
     flagColor: function () {
       switch (this.flagName.toLowerCase()) {
         case 'green' :
           return 'lime'
         case 'yellow' :
-          return '#ffea00'
+          return 'gold'
         case 'red' :
           return '#ff4334'
         case 'finished' :
-          return '#aaa'
+          return '#eee'
       }
 
       return 'white'
@@ -40,7 +39,7 @@ export default {
 
   .flag-status-wrap {
     font-size: var(--fuel-font-size);
-    margin: 10px 10px;
+    margin: 5px 10px;
     font-family: Consolas;
   }
 

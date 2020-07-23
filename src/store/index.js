@@ -3,13 +3,13 @@ import Vuex from 'vuex'
 
 // import example from './module-example'
 import settings from './settings'
+import cars from './cars'
+import app from './app'
+import race from './race'
 
 // plugins
-import VuexPersistence from 'vuex-persist'
+import createPersistedState from "vuex-persistedstate";
 
-const vuexLocal = new VuexPersistence({
-  storage: window.localStorage
-})
 
 Vue.use(Vuex)
 
@@ -25,10 +25,22 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      settings
+      settings,
+      cars,
+      app,
+      race
     },
 
-    plugins: [vuexLocal.plugin],
+    plugins: [
+      createPersistedState({
+        key: 'vuex_store',
+        storage: process.env.NODE_ENV === 'development' ? window.sessionStorage : window.localStorage,
+        paths: [
+          'Settings'
+        ]
+      }),
+
+    ],
 
     // enable strict mode (adds overhead!)
     // for dev mode only

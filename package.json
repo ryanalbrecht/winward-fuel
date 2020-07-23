@@ -13,8 +13,11 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
+    "moment": "^2.27.0",
+    "parse-ms": "^2.1.0",
     "quasar": "^1.0.0",
-    "vuex-persist": "^2.2.0"
+    "vue-inputmask": "^0.2.1",
+    "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",

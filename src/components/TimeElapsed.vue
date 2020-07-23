@@ -7,31 +7,41 @@
     </div>
     <div class="row">
       <div class="col time-remaining">
-        00.00.00
+        {{ format(times.remainingtime, false) }}
       </div>
     </div>
     <div class="row">
       <div class="col">Local</div>
-      <div class="col">00.00.00</div>
-    </div>
-    <div class="row">
-      <div class="col">Start</div>
-      <div class="col">00.00.00</div>
+      <div class="col">{{ format(times.localtime, false) }}</div>
     </div>
     <div class="row">
       <div class="col">Session</div>
-      <div class="col">00.00.00</div>
+      <div class="col">{{ format(times.sessiontime, false) }}</div>
+    </div>
+    <div class="row">
+      <div class="col">Checkered</div>
+      <div class="col">{{ format(times.finishtime, false) }}</div>
     </div>
     <div class="row">
       <div class="col">Length</div>
-      <div class="col">00.00.00</div>
+      <div class="col">{{ format(times.length, false) }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import * as time from '../lib/time'
+
 export default {
   name: 'TimeElapsed',
+  data: function () {
+    return {
+      times: this.$store.state.race
+    }
+  },
+  methods: {
+    format: time.format
+  },
   props: {
     width: Number
   }

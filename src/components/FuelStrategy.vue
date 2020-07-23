@@ -1,34 +1,35 @@
 <template>
-  <q-page class="fuel-wrap ">
+  <div class="fuel-wrap ">
 
     <div class="row justify-start fuel-header">
-        <flag-status></flag-status>
-        <time-elapsed></time-elapsed>
-        <fuel-inputs></fuel-inputs>
-        <fuel-outputs></fuel-outputs>
-        <fuel-control style="margin-left:auto"></fuel-control>
+        <flag-status :car="car"></flag-status>
+        <time-elapsed :car="car"></time-elapsed>
+        <fuel-inputs :car="car"></fuel-inputs>
+        <fuel-outputs :car="car"></fuel-outputs>
     </div>
 
 
     <div class="row fuel-table">
-      <fuel-table></fuel-table>
+      <fuel-table :car="car"></fuel-table>
     </div>
 
 
-  </q-page>
+  </div>
 </template>
 
 <script>
 import TimeElapsed from 'components/TimeElapsed'
 import FuelInputs from 'components/FuelInputs'
 import FuelOutputs from 'components/FuelOutputs'
-import FuelControl from 'components/FuelControl'
 import FlagStatus from 'components/FlagStatus'
 import FuelTable from 'components/FuelTable'
 
 export default {
   name: 'FuelStrategy',
-  components: { TimeElapsed, FuelInputs, FuelOutputs, FuelControl, FlagStatus, FuelTable }
+  props: {
+    car: Object
+  },
+  components: { TimeElapsed, FuelInputs, FuelOutputs, FlagStatus, FuelTable }
 }
 </script>
 
@@ -39,7 +40,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    top: 130px;
+    top: 185px;
   }
 
   .fuel-header * {

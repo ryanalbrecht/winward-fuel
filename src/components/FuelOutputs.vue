@@ -3,25 +3,32 @@
     <div class="col">
       <div class="row">
         <div class="col">max time</div>
-        <div class="col">00:00:00</div>
+        <div class="col">{{ format(car.capacity / car.fuelPerLap * car.laptime, false)  }}</div>
       </div>
       <div class="row">
         <div class="col">max laps</div>
-        <div class="col">0</div>
+        <div class="col">{{ round(car.capacity / car.fuelPerLap) }}</div>
       </div>
       <div class="row">
         <div class="col">fuel time</div>
-        <div class="col">0</div>
+        <div class="col">{{ round(car.capacity / car.ltrPerSec) }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import * as time from '../lib/time'
+
 export default {
   name: 'FuelOutputs',
   props: {
-    width: Number
+    width: Number,
+    car: Object
+  },
+  methods: {
+    format: time.format,
+    round: function (number) { return number.toFixed(1) }
   }
 }
 </script>

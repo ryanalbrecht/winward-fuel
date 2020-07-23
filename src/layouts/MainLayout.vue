@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
 
-    <q-header :elevated=false bordered class="bg-grey-1 text-black">
+    <!-- <q-header :elevated=false bordered class="bg-grey-1 text-black">
       <q-bar class="q-electron-drag bg-grey-5" dense >
         <div class="q-pr-xs">Winward<span class="text-blue-8">Fuel</span></div>
 
@@ -48,10 +48,12 @@
         <q-btn dense flat icon="crop_square" />
         <q-btn dense flat icon="close" />
       </q-bar>
-    </q-header>
+    </q-header> -->
 
     <q-page-container>
-      <router-view />
+      <keep-alive include="">
+        <router-view />
+      </keep-alive>
     </q-page-container>
   </q-layout>
 </template>

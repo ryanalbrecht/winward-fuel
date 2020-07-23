@@ -21,10 +21,10 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    width: 1210,
-    height: 600,
+    width: 1150,
+    height: 700,
     useContentSize: true,
-    minWidth: 1200,
+    minWidth: 1150,
     //frame: false,
     webPreferences: {
       // Change from /quasar.conf.js > electron > nodeIntegration;
