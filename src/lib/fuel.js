@@ -25,7 +25,7 @@ export function calcLap (lap, previousLap, config, raceLength) {
   const _toEmptyLaps         = toEmptyLaps(_fuelRemaining, c.fuelPerLap)
   const _toEmptyTime         = toEmptyTime(c.laptime, _toEmptyLaps)
   const _toEndTime           = toEndTime(raceLength, lap.session)
-  const _toEndLaps           = toEndLaps(raceLength, lap.session, c.lapTime)
+  const _toEndLaps           = toEndLaps(raceLength, lap.session, config.laptime)
   const _neededFuel          = neededFuel(raceLength, lap.session, c.laptime, _fuelRemaining, c.fuelPerLap)
   const _neededLaps          = neededLaps(raceLength, lap.session, c.laptime, _fuelRemaining, c.fuelPerLap)
   const _fuelingToEnd        = fuelingToEnd(raceLength, lap.session, c.laptime, _fuelRemaining, c.fuelPerLap, c.ltrPerSec)

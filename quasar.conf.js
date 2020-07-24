@@ -21,7 +21,8 @@ module.exports = function (/* ctx */) {
     boot: [
       'axios',
       'menu',
-      'vue-plugins'
+      'vue-plugins',
+      'electron'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css

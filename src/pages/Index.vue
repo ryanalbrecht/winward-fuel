@@ -33,6 +33,8 @@
 import FuelStrategy from 'components/FuelStrategy'
 import { P1ts } from '../lib/p1ts'
 
+const axios = require('axios').default;
+
 export default {
   name: 'PageIndex',
   components: { FuelStrategy },

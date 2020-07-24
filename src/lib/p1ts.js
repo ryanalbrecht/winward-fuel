@@ -1,4 +1,5 @@
 const axios = require('axios')
+var qs = require('qs');
 
 export class P1ts {
 
@@ -7,6 +8,7 @@ export class P1ts {
     this.username = username;
     this.password = password;
 
+    this.loginEndpoint = 'http://' + host + '/login';
     this.carDataEndpoint = 'http://' + host + '/api/cardata/';
     this.snapshotEndpoint = 'http://' + host + '/api/snapshot';
   }
@@ -22,6 +24,21 @@ export class P1ts {
     let response = await axios.get(`${this.snapshotEndpoint}`);
     let heartbeat = response.data.data.heartbeat;
     return heartbeat;
+  }
+
+  async login(){
+    let csrf = await axios.get(this.loginEndpoint);
+    let _csrf = csrf.data.match(/(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}/g)
+
+    const params = new URLSearchParams();;
+    params.append('username', this.username)
+    params.append('password', this.password)
+    params.append('_csrf', _csrf[0])
+
+    let response = await axios.post(this.loginEndpoint, params)
+
+    console.log(response)
+    //return response;
   }
 
 }

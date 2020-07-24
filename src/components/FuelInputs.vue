@@ -13,6 +13,7 @@
               ref="threshold"
               v-mask="'99\\:99.999'"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -25,6 +26,7 @@
               ref="laptime"
               v-mask="'99\\:99.999'"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -36,6 +38,7 @@
               :value="car.fuelPerLap"
               ref="fuelPerLap"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -47,6 +50,7 @@
               :value="car.capacity"
               ref="capacity"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -58,6 +62,7 @@
               :value="car.startCapacity"
               ref="startCapacity"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -69,6 +74,7 @@
               :value="car.factor"
               ref="factor"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -83,6 +89,7 @@
               class="car" :value="car.number"
               ref="number"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
               readonly
             >
           </div>
@@ -95,6 +102,7 @@
               :value="car.pitDelta"
               ref="pitDelta"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -106,6 +114,7 @@
               :value="car.ltrPerSec"
               ref="ltrPerSec"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -117,6 +126,7 @@
               :value="car.useFunction"
               ref="useFunction"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -128,6 +138,7 @@
               :value="car.slope"
               ref="slope"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -139,6 +150,7 @@
               :value="car.intercept"
               ref="intercept"
               v-on:blur="submitConfig"
+              v-on:keyup.enter="$event.target.blur()"
             >
           </div>
         </div>
@@ -219,7 +231,7 @@ export default {
   }
 
   input:focus {
-    border: 1px solid rgb(21, 255, 0);
+    border: 1px solid rgb(30, 255, 0);
   }
 
 </style>

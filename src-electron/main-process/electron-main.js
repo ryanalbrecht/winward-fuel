@@ -1,5 +1,8 @@
 import { app, BrowserWindow, nativeTheme } from 'electron'
 
+//disable cors
+app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors');
+
 try {
   if (process.platform === 'win32' && nativeTheme.shouldUseDarkColors === true) {
     require('fs').unlinkSync(require('path').join(app.getPath('userData'), 'DevTools Extensions'))
@@ -27,6 +30,7 @@ function createWindow () {
     minWidth: 1150,
     //frame: false,
     webPreferences: {
+      webSecurity: false,
       // Change from /quasar.conf.js > electron > nodeIntegration;
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
       nodeIntegration: process.env.QUASAR_NODE_INTEGRATION,
