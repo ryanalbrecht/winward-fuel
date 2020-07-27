@@ -18,10 +18,12 @@ export function calcLapsAll (laps, config, raceLength) {
 export function calcLap (lap, previousLap, config, raceLength) {
   const c = config
 
+  const _calcFuelUsed        = fuelUsed(lap.laptime, c.fuelPerLap, c.useFunction, c.slope, c.intercept, c.factor)
+  const _fuelUsed            = lap.overrideFuelUsed || _calcFuelUsed
 
-
-  const _fuelUsed            = lap.overrideFuelUsed || fuelUsed(lap.laptime, c.fuelPerLap, c.useFunction, c.slope, c.intercept, c.factor)
+  const _calcFuelRemaining   = fuelRemaining((previousLap.overrideFuelRemaining || previousLap.fuelRemaining), _fuelUsed)
   const _fuelRemaining       = lap.overrideFuelRemaining || fuelRemaining(previousLap.overrideFuelRemaining || previousLap.fuelRemaining, _fuelUsed)
+
   const _toEmptyLaps         = toEmptyLaps(_fuelRemaining, c.fuelPerLap)
   const _toEmptyTime         = toEmptyTime(c.laptime, _toEmptyLaps)
   const _toEndTime           = toEndTime(raceLength, lap.session)
@@ -54,7 +56,9 @@ export function calcLap (lap, previousLap, config, raceLength) {
     flag: lap.flag,
     number: lap.number,
     overrideFuelRemaining: lap.overrideFuelRemaining,
-    overrideFuelUsed: lap.overrideFuelUsed
+    overrideFuelUsed: lap.overrideFuelUsed,
+    calcFuelUsed: _calcFuelUsed,
+    calcFuelRemaining: _calcFuelRemaining
   }
 }
 

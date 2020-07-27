@@ -7,7 +7,5 @@ export default function () {
     finishtime: 0,
     remainingtime: 0,
     length: 0,
-
-
   }
 }

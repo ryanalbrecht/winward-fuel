@@ -26,7 +26,7 @@
           </td>
           <td width="6.666%" style="background-color: #d98686 !important">
             <q-tooltip>The number of laps that can be completed with the remaining fuel in the car</q-tooltip>
-            TO EMPTY<br/>laps            
+            TO EMPTY<br/>laps
           </td>
           <td width="6.666%" style="background-color: #d98686 !important">
             <q-tooltip>The amount of time that can be driven with the remaing fuel in the car</q-tooltip>
@@ -38,30 +38,30 @@
           </td>
           <td width="6.666%" style="background-color: #CCCC00 !important">
             <q-tooltip>The number of laps needed in addition to the fuel in the car. Eg. Thomas! I need you to squeeze 4 for more laps out of the tank</q-tooltip>
-            NEEDED<br/>laps  
+            NEEDED<br/>laps
           </td>
           <td width="6.666%" style="background-color:	#6fc96f  !important">
             <q-tooltip>The time remaining in the race</q-tooltip>
-            TO END<br/>time            
+            TO END<br/>time
           </td>
           <td width="6.666%" style="background-color:	#6fc96f  !important">
             <q-tooltip>The number of laps remaining in the race using the average configured laptime</q-tooltip>
-            TO END<br/>laps              
+            TO END<br/>laps
           </td>
           <td width="6.666%" style="background-color: #c17dd1 !important">
-            <q-tooltip>The number of seconds of fuel needed to be put in into the car to finish the race</q-tooltip> 
-            FUELING<br/>to end             
+            <q-tooltip>The number of seconds of fuel needed to be put in into the car to finish the race</q-tooltip>
+            FUELING<br/>to end
           </td>
           <td width="6.666%" style="background-color: #c17dd1 !important">
             <q-tooltip>The number of seconds of fuel needed to be put in into the car to fill it up</q-tooltip>
-            FUELING<br/>to full             
+            FUELING<br/>to full
           </td>
           <td width="6.666%" style="background-color: 	#7497d6 !important">
-            <q-tooltip>The number of seconds of fuel needed to be put in into the car to finish the race AND to traverse pit lane</q-tooltip> 
-            FUELING<br/>pit+to end</td>           
+            <q-tooltip>The number of seconds of fuel needed to be put in into the car to finish the race AND to traverse pit lane</q-tooltip>
+            FUELING<br/>pit+to end</td>
           <td width="6.666%" style="background-color: 	#7497d6 !important">
-            <q-tooltip>The number of seconds of fuel needed to be put in into the car to fill it up AND to traverse pit lane</q-tooltip> 
-            FUELING<br/>pit+to full</td>            
+            <q-tooltip>The number of seconds of fuel needed to be put in into the car to fill it up AND to traverse pit lane</q-tooltip>
+            FUELING<br/>pit+to full</td>
         </tr>
       </thead>
       <tbody>
@@ -79,20 +79,24 @@
           <td width="6.666%">
             <input
               type="text"
-              v-bind:class="{override: !!lap.overrideFuelUsed}"
+              v-bind:class="{override: lap.calcFuelUsed != lap.fuelUsed}"
               :value="round(lap.overrideFuelUsed || lap.fuelUsed, 3)"
               v-on:keyup.enter="$event.target.blur()"
               v-on:blur="fuelUsedChange(lap, $event)"
             >
+
+            <q-tooltip v-if="!!lap.overrideFuelUsed">{{round(lap.calcFuelUsed,3)}}</q-tooltip>
           </td>
           <td width="6.666%">
             <input
               type="text"
-              v-bind:class="{override: !!lap.overrideFuelRemaining}"
+              v-bind:class="{override: lap.calcFuelRemaining != lap.fuelRemaining}"
               :value="round(lap.overrideFuelRemaining || lap.fuelRemaining)"
               v-on:keyup.enter="$event.target.blur()"
               v-on:blur="fuelRemainingChange(lap, $event)"
             >
+
+            <q-tooltip v-if="!!lap.overrideFuelRemaining">{{round(lap.calcFuelRemaining,3)}}</q-tooltip>
           </td>
           <td width="6.666%">{{ round(lap.toEmptyLaps) }}</td>
           <td width="6.666%">{{ format(lap.toEmptyTime, false) }}</td>
@@ -199,13 +203,13 @@ export default {
     background-color: #e3e3e3;
   }
 
+
   /* STICKY THEAD */
 
 
   thead {
     display: block; /* to take the same width as tr */
-    position: absolute;
-    left: 10px;
+    left: 0px;
     right: 17px; /* - 17px because of the scrollbar width */
     position: absolute;
   }
@@ -219,7 +223,7 @@ export default {
     position: absolute;
     bottom: 0px;
     top: 50px;
-    left: 10px;
+    left: 0px;
     right: 0px;
     overflow-y: scroll; /* keeps the scrollbar even if it doesn't need it; display purpose */
   }

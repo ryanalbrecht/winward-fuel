@@ -11,6 +11,14 @@ import race from './race'
 import createPersistedState from "vuex-persistedstate";
 
 
+// createPersistedState({
+//   key: 'vuex_store',
+//   storage: process.env.NODE_ENV === 'development' ? window.sessionStorage : window.localStorage,
+//   paths: [
+//     'Settings'
+//   ]
+// }),
+
 Vue.use(Vuex)
 
 /*
@@ -31,16 +39,7 @@ export default function (/* { ssrContext } */) {
       race
     },
 
-    plugins: [
-      createPersistedState({
-        key: 'vuex_store',
-        storage: process.env.NODE_ENV === 'development' ? window.sessionStorage : window.localStorage,
-        paths: [
-          'Settings'
-        ]
-      }),
-
-    ],
+    plugins: [ ],
 
     // enable strict mode (adds overhead!)
     // for dev mode only

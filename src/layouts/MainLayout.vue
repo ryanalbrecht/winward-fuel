@@ -51,7 +51,7 @@
     </q-header> -->
 
     <q-page-container>
-      <keep-alive include="">
+      <keep-alive include="/">
         <router-view />
       </keep-alive>
     </q-page-container>

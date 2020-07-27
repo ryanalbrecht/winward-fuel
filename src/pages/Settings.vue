@@ -14,7 +14,6 @@
             label="Car Numbers"
             lazy-rules
             v-model="settings.carNumbers"
-            :rules="[ val => val && val.length > 0 || 'Please type something']"
           />
 
           <q-input
@@ -27,30 +26,13 @@
 
           <q-input
             square outlined stack-label dense
-            label="P1TS Username"
-            lazy-rules
-            v-model="settings.username"
-            :rules="[ val => val && val.length > 0 || 'Please type something']"
-          />
-
-          <q-input
-            square outlined stack-label dense
-            label="P1TS Password"
-            type="password"
-            lazy-rules
-            v-model="settings.password"
-            :rules="[ val => val && val.length > 0 || 'Please type something']"
-          />
-
-          <q-input
-            square outlined stack-label dense
             type="number"
             label="Update Interval"
             lazy-rules
             v-model="settings.updateInterval"
             :rules="[
-              val => val !== null && val !== '' || 'Please type your age',
-              val => val > 1 && val < 10000 || 'please type a number between 1 and 10000'
+              val => val !== null && val !== '' || 'Please type a number',
+              val => val >= 1 && val <= 10000 || 'please type a number between 1 and 10000'
             ]"
           />
 
@@ -81,7 +63,12 @@ export default {
   },
   methods: {
     onSubmit () {
-      this.$store.dispatch('settings/setSettings', this.settings)
+      this.$store.dispatch('settings/setSettings', this.settings);
+      this.$q.notify({
+        type: 'positive',
+        message: `Settings saved.`
+      })
+
     }
   }
 }

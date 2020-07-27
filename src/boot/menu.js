@@ -1,6 +1,8 @@
 const { remote, shell } = require('electron')
-const { Menu } = remote
+const { Menu, dialog } = remote
 const fs = require('fs');
+
+import * as files from '../lib/files';
 
 
 export default ( boot ) => {
@@ -12,7 +14,20 @@ export default ( boot ) => {
     {
       label: 'File',
       submenu: [
-        isMac ? { role: 'close' } : { role: 'quit' }
+        isMac ? { role: 'close' } : { role: 'quit' },
+        {
+          label: 'Save',
+          click: () => {
+            files.saveReplay(boot.store)
+          }
+        },
+        {
+          label: 'Open',
+          click: () => {
+            files.openReplay(boot.store)
+          }
+        },
+
       ]
     },
 
@@ -65,7 +80,7 @@ export default ( boot ) => {
       role: 'help',
       submenu: [
         {
-          label: 'lol, sorry there is no help',
+          label: 'sorry there is no help yet...',
         }
       ]
     }

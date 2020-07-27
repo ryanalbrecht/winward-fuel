@@ -6,6 +6,15 @@ export function setCarConfig (context, payload) {
 
 }
 
+
+export function addCar (context,number) {
+  context.commit('ADD_CAR', number)
+}
+
+export function removeCar (context,number) {
+  context.commit('REMOVE_CAR', number)
+}
+
 export function addLap (context, payload) {
   // get last lap of car
   let car = context.state.find(c => c.number === payload.number)
@@ -85,4 +94,10 @@ export function setLap(context,payload){
 
 export function clearLaps (context) {
   context.commit('SET_LAPS', {laps:[], number: context.rootState.app.activeCar })
+}
+
+
+
+export function resetState(context, payload) {
+  context.commit("RESET_STATE", payload);
 }

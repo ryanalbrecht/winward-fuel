@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "arr-diff": "^4.0.0",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
+    "deepmerge": "^4.2.2",
     "fast-xml-parser": "^3.17.4",
     "moment": "^2.27.0",
     "parse-ms": "^2.1.0",

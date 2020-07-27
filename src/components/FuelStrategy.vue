@@ -2,15 +2,15 @@
   <div class="fuel-wrap ">
 
     <div class="row justify-start fuel-header">
-        <flag-status :car="car"></flag-status>
-        <time-elapsed :car="car"></time-elapsed>
-        <fuel-inputs :car="car"></fuel-inputs>
-        <fuel-outputs :car="car"></fuel-outputs>
+        <flag-status></flag-status>
+        <time-elapsed></time-elapsed>
+        <fuel-inputs v-if="car != 0" :car="activeCar"></fuel-inputs>
+        <fuel-outputs v-if="car != 0" :car="activeCar"></fuel-outputs>
     </div>
 
 
     <div class="row fuel-table">
-      <fuel-table :car="car"></fuel-table>
+      <fuel-table  v-if="car != 0" :car="activeCar"></fuel-table>
     </div>
 
 
@@ -27,7 +27,10 @@ import FuelTable from 'components/FuelTable'
 export default {
   name: 'FuelStrategy',
   props: {
-    car: Object
+    car: Number
+  },
+  computed: {
+    activeCar() { return this.$store.state.cars.find(c => c.number === this.$store.state.app.activeCar) }
   },
   components: { TimeElapsed, FuelInputs, FuelOutputs, FlagStatus, FuelTable }
 }
@@ -39,7 +42,7 @@ export default {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0px;
     top: 185px;
   }
 

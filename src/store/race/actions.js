@@ -20,3 +20,8 @@ export function setRaceState (context, payload) {
   })
 
 }
+
+
+export function resetState(context, payload) {
+  context.commit("RESET_STATE", payload);
+}
