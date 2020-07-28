@@ -1,7 +1,7 @@
 export default function () {
   return {
     carNumbers: '4,57',
-    host: 'p1ts.com',
+    host: 'pit1.winwardpit.com',
     username: 'n/a',
     password: 'n/a',
     updateInterval: 1

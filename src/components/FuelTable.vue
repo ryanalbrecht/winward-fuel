@@ -75,7 +75,12 @@
             {{ lap.lap }}
           </td>
           <td width="6.666%">{{ lap.driver }}</td>
-          <td width="6.666%">{{ format(lap.laptime) }}</td>
+          <td 
+            v-bind:class="{override: lap.laptime > threshold}"
+            width="6.666%"
+          >
+            {{ format(lap.laptime) }}
+          </td>
           <td width="6.666%">
             <input
               type="text"
@@ -161,6 +166,9 @@ export default {
   computed: {
     lastLap: function (){
       return this.car.laps.length
+    },
+    threshold: function() {
+      return this.car.threshold
     }
   }
 }
@@ -253,7 +261,7 @@ export default {
     box-shadow: 0 0 0 2px rgb(255, 0, 0);
   }
 
-  input.override {
+  .override {
     color: red;
     font-weight: bolder;
   }

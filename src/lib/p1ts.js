@@ -8,9 +8,17 @@ export class P1ts {
     this.username = username;
     this.password = password;
 
-    this.loginEndpoint = 'http://' + host + '/login';
-    this.carDataEndpoint = 'http://' + host + '/api/cardata/';
-    this.snapshotEndpoint = 'http://' + host + '/api/snapshot';
+    if(host == 'p1ts.com'){
+      this.loginEndpoint = 'http://' + host + '/login';
+      this.carDataEndpoint = 'http://' + host + '/api/cardata/';
+      this.snapshotEndpoint = 'http://' + host + '/api/snapshot';
+    }else{
+      this.loginEndpoint = 'http://' + host + '/p1imsa/login';
+      this.carDataEndpoint = 'http://' + host + '/p1imsa/api/cardata/';
+      this.snapshotEndpoint = 'http://' + host + '/p1imsa/api/snapshot';
+    }
+
+
   }
 
   async fetchCarData(number){
