@@ -33,22 +33,53 @@ export function addLap (context, payload) {
 
 export function addNewLaps (context, payload) {
   let car = context.state.find(c => c.number === payload.number);
-  let sLaps = car.laps
+  let stateLaps = car.laps;
 
-  for(let lap of payload.laps){
-    if( sLaps.findIndex( sl => sl.lap === lap.l ) === -1 ){
+  //remove all dummy laps;
+  let payloadLaps = payload.laps.filter(l => {
+    return l.lt >= 0;
+  })
+
+  //add missing laps
+  let lastLap = payloadLaps[  payloadLaps.length - 1 ];
+  let normalizedLaps = [];
+
+  for(let x = 1; x <= lastLap.l; x++){
+    let lap = payloadLaps.find( l => l.l === x)
+
+    if(lap !== undefined){
+      normalizedLaps.push(lap)
+    }else{
+      normalizedLaps.push({
+        number: payload.number,
+        fn: 'MISSING',
+        tt: 0,
+        lt: 0,
+        l: x,
+        pit: false,
+        f: 'finished'
+      })
+    }
+
+
+  }
+
+  for(let lap of normalizedLaps){
+    if( stateLaps.findIndex( sl => sl.lap === lap.l ) === -1 ){
       lap.number = payload.number
 
-      //convert pits data to my data
-      let winwardLap = {
-        number: payload.number,
-        driver: lap.fn,
-        session: lap.tt,
-        laptime: lap.lt,
-        lap: lap.l,
-        pit: lap.pit,
-        flag: lap.f
-      }
+        //convert pits data to my data
+        let winwardLap = {
+          number: payload.number,
+          driver: lap.fn,
+          session: lap.tt,
+          laptime: lap.lt,
+          lap: lap.l,
+          pit: lap.pit,
+          flag: lap.f
+        }
+
+
       context.dispatch('addLap', winwardLap)
     }
   }

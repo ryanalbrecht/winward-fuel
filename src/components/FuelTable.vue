@@ -74,8 +74,8 @@
             }">
             {{ lap.lap }}
           </td>
-          <td width="6.666%">{{ lap.driver }}</td>
-          <td 
+          <td width="6.666%"  v-bind:class="{override: lap.driver == 'MISSING'}">{{ lap.driver }}</td>
+          <td
             v-bind:class="{override: lap.laptime > threshold}"
             width="6.666%"
           >
