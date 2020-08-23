@@ -11,3 +11,13 @@ export function setP1ts(context, instance){
 export function setUpdating(context, updating){
   context.commit('SET_UPDATING', updating)
 }
+
+
+export function setUpdateError(context, error){
+  context.commit('SET_UPDATE_ERROR', error)
+}
+
+
+export function incrementUpdateSeq(context){
+  context.commit('INCREMENT_UPDATE_SEQ')
+}

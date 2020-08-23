@@ -14,13 +14,14 @@
         />
       </div>
 
-      <div class="col-3" style="margin-left:auto">
+      <div class="col-4" style="margin-left:auto">
         <q-btn unelevated  color="grey-8" size="12px" label="Clear Data" class="q-mr-xs" v-on:click="clearData" />
-
         <q-btn v-if="!updating" unelevated  color="grey-8" size="12px" label="Start Update" class="q-mr-xs" v-on:click="startUpdate" />
         <q-btn v-else unelevated  size="12px" label="Stop Update" class="q-mr-xs pulse-green" v-on:click="stopUpdate" />
+        <span style="font-size:9px">{{updateSeq}} <span v-if="updateError" style="color:RED">Update Error</span></span>
       </div>
     </div>
+
 
     <p class="q-pa-lg" v-if="cars.length == 0">No car numbers have been added</p>
     <fuel-strategy :car="activeCarNumber" ></fuel-strategy>
@@ -112,17 +113,19 @@ export default {
               laps: data,
               number: car.number
             })
-          })
-          .catch(err => {
-            console.log(err)
+            this.$store.dispatch('app/incrementUpdateSeq');
+            this.$store.dispatch('app/setUpdateError', false);
           })
         }
-
-        if(this.$store.state.app.updating){
-          this.updateTimeout = setTimeout(this.doUpdate, this.$store.state.settings.updateInterval*1000)
-        }
-
       })
+      .catch(err => {
+        //console.log(err)
+        this.$store.dispatch('app/setUpdateError', true);
+      })
+
+      if(this.$store.state.app.updating){
+        this.updateTimeout = setTimeout(this.doUpdate, this.$store.state.settings.updateInterval*1000)
+      }
 
     }
 
@@ -139,6 +142,12 @@ export default {
     },
     updating () {
       return this.$store.state.app.updating
+    },
+    updateSeq () {
+      return this.$store.state.app.updateSeq
+    },
+    updateError () {
+      return this.$store.state.app.updateError
     }
   }
 }

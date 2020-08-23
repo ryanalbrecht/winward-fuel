@@ -17,7 +17,7 @@
 export default {
   name: 'FuelControl',
   props: {
-  }
+  },
 }
 </script>
 
