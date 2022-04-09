@@ -16,7 +16,7 @@
     "core-js": "^3.6.5",
     "deepmerge": "^4.2.2",
     "fast-xml-parser": "^3.17.4",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "parse-ms": "^2.1.0",
     "qs": "^6.9.4",
     "quasar": "^1.0.0",
