@@ -18,7 +18,7 @@
     "fast-xml-parser": "^3.17.4",
     "moment": "^2.27.0",
     "parse-ms": "^2.1.0",
-    "qs": "^6.9.4",
+    "qs": "^6.7.3",
     "quasar": "^1.0.0",
     "vue-inputmask": "^0.2.1",
     "vuex-persistedstate": "^3.0.1"
